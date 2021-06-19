@@ -1,0 +1,35 @@
+{
+  "name": "conversor-csv-json",
+  "version": "1.0.0",
+  "description": "A conversor for csv and json files",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:react dev:electron",
+    "dev:electron": "electron .",
+    "dev:react": "webpack --mode development",
+    "build": "build:react && build:electron",
+    "build:react": "webpack --mode production",
+    "build:electron": ""
+  },
+  "author": "Helton Fábio",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "electron": "^13.1.2",
+    "html-loader": "^2.1.2",
+    "html-webpack-plugin": "^5.3.1",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2"
+  },
+  "dependencies": {
+    "file-loader": "^6.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.0"
+  }
+}
