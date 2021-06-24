@@ -7,10 +7,10 @@ module.exports = {
     'babel-polyfill',
     './src/index.js'
   ],
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/
-  },
+  //watch: true,
+  //watchOptions: {
+  //  ignored: /node_modules/
+  //},
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
