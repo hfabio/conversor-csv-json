@@ -10,14 +10,16 @@ function createWindow () {
     webPreferences: {
       // preload: path.join(__dirname, 'preload.js')
       // preload: path.join(__dirname, 'dist', 'main.js')
-    }
+    },
+    icon: path.join(__dirname, 'src', 'assets', 'icon.png')
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile('./dist/index.html');
-  mainWindow.openDevTools();
-
   // Open the DevTools.
+  // mainWindow.openDevTools();
+  mainWindow.removeMenu();
+  mainWindow.maximize();
   // mainWindow.webContents.openDevTools()
 }
 

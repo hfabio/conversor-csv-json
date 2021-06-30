@@ -2,17 +2,20 @@
   "name": "conversor-csv-json",
   "version": "1.0.0",
   "description": "A conversor for csv and json files",
+  "author": "Helton Fábio",
+  "license": "MIT",
   "main": "main.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:electron": "electron .",
     "dev:react": "webpack --mode development",
-    "build": "build:react && build:electron",
+    "build": "rm -rf ./build; mkdir build ; rm -rf dist ; yarn build:react && yarn build:electron && yarn build:clear-names",
     "build:react": "webpack --mode production",
-    "build:electron": ""
+    "build:windows": "cd .. ; electron-packager ./conversor-csv-pdf conversor-csv-pdf --platform=win32  --arch=x64 --electron-version=13.1.4",
+    "build:linux": "cd .. ; electron-packager ./conversor-csv-pdf conversor-csv-pdf --platform=linux  --arch=x64 --electron-version=13.1.4",
+    "build:electron": "yarn build:linux && yarn build:windows && cd .. ; mv conversor-csv-pdf-* ./conversor-csv-pdf/build; cd ./conversor-csv-pdf",
+    "build:clear-names": "cd build ; mv *linux* linux-x64 ; mv *win* windows-x64"
   },
-  "author": "Helton Fábio",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.5",
@@ -31,5 +34,19 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.0"
+  },
+  "build": {
+    "appId": "com.conversor",
+    "productName": "Conversor csv json",
+    "target": "NSIS",
+    "directory": {
+      "output": "build"
+    },
+    "mac": {
+      "category": "conversor.csv.json"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
