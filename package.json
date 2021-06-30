@@ -9,12 +9,13 @@
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:electron": "electron .",
     "dev:react": "webpack --mode development",
-    "build": "rm -rf ./build; mkdir build ; rm -rf dist ; yarn build:react && yarn build:electron && yarn build:clear-names",
+    "build": "rm -rf ./build; mkdir build ; rm -rf dist ; yarn build:react && yarn build:electron && yarn build:clear-names && yarn build:wrap",
     "build:react": "webpack --mode production",
     "build:windows": "cd .. ; electron-packager ./conversor-csv-pdf conversor-csv-pdf --platform=win32  --arch=x64 --electron-version=13.1.4",
     "build:linux": "cd .. ; electron-packager ./conversor-csv-pdf conversor-csv-pdf --platform=linux  --arch=x64 --electron-version=13.1.4",
     "build:electron": "yarn build:linux && yarn build:windows && cd .. ; mv conversor-csv-pdf-* ./conversor-csv-pdf/build; cd ./conversor-csv-pdf",
-    "build:clear-names": "cd build ; mv *linux* linux-x64 ; mv *win* windows-x64"
+    "build:clear-names": "cd build ; mv *linux* linux-x64 ; mv *win* windows-x64 ; cd .. ",
+    "build:wrap": "cd build ; for file in *; do tar -zcvf ${file%.*}.tar.gz $file; done ; cd .."
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
