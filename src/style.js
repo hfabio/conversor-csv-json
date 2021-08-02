@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Page = styled.section`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   align-content: center;

@@ -1,10 +1,37 @@
+const parseCsvText = (text) => {
+  const hasQuotes = (element) =>
+    element[0] === element[element.length - 1] && element[0]?.match(/'|"/);
+  const reBreakLine = /(\r\n|\r|\n)/g;
+  const reValues = /(\s*"[^"]+"\s*|\s*[^,;]+|(,|;))(?=(,|;)|$)/g;
+
+  const matches = text
+    .split(reBreakLine)
+    .filter((element) => !element.match(reBreakLine) && element.length > 0)
+    .map((element) => element.match(reValues))
+    .map((values) =>
+      values.map((element) =>
+        hasQuotes(element.trim())
+          ? element.substr(1, element.length - 2).trim()
+          : element.trim()
+      )
+    );
+  for (const row in matches) {
+    if (row in matches) {
+      for (let n = 0; n < row.length; n += 1) {
+        matches[row][n] = matches[row][n].trim();
+        if (matches[row][n] === ',') {
+          matches[row][n] = '';
+        }
+      }
+    }
+  }
+  return matches;
+};
+
 const parseData = ({ text, format, separator, parseQuote, hasTitle }) => {
   if (format.includes('sv')) { // csv / tsv
-    const splitted = text.split('\n')
-      .map(line =>
-        line.split(separator)
-          .map(cell => parseQuote ? cell.replace(/(\"|\'|\n|\r)/g, '') : cell.replace(/(\n|\r)/gi, ''))
-      );
+    const splitted = parseCsvText(text);
+    console.log(splitted)
     const fixData = txt => isNaN(txt) ? txt : Number(txt);
     if (hasTitle) {
       return new Array(splitted.length - 1).fill(splitted[0])

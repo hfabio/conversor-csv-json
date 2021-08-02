@@ -26,7 +26,7 @@ const FilePicker = ({ content, setContent }) => {
 
   return (
     <Container>
-      <input type="file" accept=".csv,.tsv,.json" onChange={e => pickFiles(e)} ref={input} multiple />
+      <input type="file" accept=".csv,.tsv,.xlsx,.json" onChange={e => pickFiles(e)} ref={input} multiple />
       <Clear onClick={clear}>Clear files</Clear>
     </Container>
   )
